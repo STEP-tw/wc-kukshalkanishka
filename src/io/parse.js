@@ -1,23 +1,28 @@
-parseForSingleFile = function(args) {
-  option = "allCounts";
+parseForNoOption = function(args) {
   filePath = args[0];
-  formatter = "nonOption";
-  return { option, filePath, formatter };
+  return { options, filePath };
 };
 
-const formatters = { "-l": "line", "-c": "byte", "-w": "word" };
-const counters = { "-l": "lineCount", "-c": "byteCount", "-w": "wordCount" };
+const counters = { l: "lineCount", c: "byteCount", w: "wordCount" };
+
+const getOptions = function(arg) {
+  let userOptions = arg.split("");
+  return userOptions.map(userOption => counters[userOption]);
+};
+
+const startWithDash = option => option.startsWith("-");
 
 const parse = function(args) {
-  let option = counters[args[0]];
+  let firstArg = args[0];
+  let options = getOptions(firstArg.slice(1));
   let filePath = args[1];
 
-  if (args.length === 1) {
-    return parseForSingleFile(args);
+  if (!startWithDash(firstArg)) {
+    options = ["lineCount", "wordCount", "byteCount"];
+    filePath = args[0];
   }
-  let formatter = formatters[args[0]];
 
-  return { option, filePath, formatter };
+  return { options, filePath };
 };
 
 module.exports = { parse };

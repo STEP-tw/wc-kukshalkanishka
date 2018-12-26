@@ -1,8 +1,9 @@
-const { NEWLINE, EMPTY } = require("./constants.js");
+const { NEWLINE } = require("./constants.js");
 const newlineOrSpace = /[ \n]+/;
 
 const getCount = function(delimiter, content) {
-  return content.split(delimiter).length;
+  let splitted = content.split(delimiter);
+  return splitted.length;
 };
 
 const countWords = function(content) {
@@ -15,37 +16,26 @@ const countLines = function(content) {
 };
 
 const countBytes = function(content) {
-  return getCount(EMPTY, content);
-};
-
-const getAllCounts = function(content) {
-  let lineCount = countLines(content);
-  let wordCount = countWords(content);
-  let byteCount = countBytes(content);
-  return { lineCount, wordCount, byteCount };
+  return content.length;
 };
 
 const counters = {
   lineCount: countLines,
   byteCount: countBytes,
-  wordCount: countWords,
-  allCounts: getAllCounts
+  wordCount: countWords
 };
 
-const wc = function({ filePath, option }, fs) {
+const wc = function({ filePath, options }, fs) {
   let content = fs.readFileSync(filePath, "utf8");
   let counts = {
     lineCount: undefined,
     byteCount: undefined,
     wordCount: undefined
   };
-  let counter = counters[option];
-  counts[option] = counter(content);
-
-  if (counter === getAllCounts) {
-    counts = getAllCounts(content);
-  }
-
+  options.map(function(option) {
+    counter = counters[option];
+    counts[option] = counter(content);
+  });
   counts.filePath = filePath;
   return counts;
 };

@@ -17,7 +17,10 @@ describe("wc", () => {
   });
   describe("wc without option, for single file", () => {
     it("should return the filePath, lines, words and bytes count of the provided file", () => {
-      let actual = wc({ option: "allCounts", filePath: "file1" }, fs);
+      let actual = wc(
+        { options: ["lineCount", "wordCount", "byteCount"], filePath: "file1" },
+        fs
+      );
       let expected = {
         filePath: "file1",
         lineCount: 3,
@@ -28,7 +31,10 @@ describe("wc", () => {
     });
 
     it("should give lineCount as 0 for single line file", () => {
-      let actual = wc({ option: "allCounts", filePath: "file2" }, fs);
+      let actual = wc(
+        { options: ["lineCount", "wordCount", "byteCount"], filePath: "file2" },
+        fs
+      );
       let expected = {
         filePath: "file2",
         lineCount: 0,
@@ -41,7 +47,7 @@ describe("wc", () => {
 
   describe("wc with option for single file", () => {
     it("should only return lineCount and filePath's value when option is line", () => {
-      let actual = wc({ option: "lineCount", filePath: "file1" }, fs);
+      let actual = wc({ options: ["lineCount"], filePath: "file1" }, fs);
       let expected = {
         filePath: "file1",
         byteCount: undefined,
@@ -52,7 +58,7 @@ describe("wc", () => {
     });
 
     it("should only return byteCount and filePath's value when option is byte", () => {
-      let actual = wc({ option: "byteCount", filePath: "file1" }, fs);
+      let actual = wc({ options: ["byteCount"], filePath: "file1" }, fs);
       let expected = {
         filePath: "file1",
         lineCount: undefined,
@@ -63,7 +69,7 @@ describe("wc", () => {
     });
 
     it("should only return byteCount and filePath's value when option is byte", () => {
-      let actual = wc({ option: "wordCount", filePath: "file1" }, fs);
+      let actual = wc({ options: ["wordCount"], filePath: "file1" }, fs);
       let expected = {
         filePath: "file1",
         lineCount: undefined,
