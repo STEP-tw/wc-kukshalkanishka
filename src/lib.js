@@ -1,4 +1,5 @@
 const { NEWLINE, EMPTY } = require("./constants.js");
+const newlineOrSpace = /[ \n]+/;
 
 const getCount = function(content, delimiter) {
   return content.split(delimiter).length;
@@ -6,7 +7,7 @@ const getCount = function(content, delimiter) {
 
 const getWordCount = function(content) {
   let trimmedContent = content.trim();
-  return trimmedContent.split(/[ \n]+/).length;
+  return getCount(trimmedContent, newlineOrSpace);
 };
 
 const getCounts = function(content) {

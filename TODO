@@ -1,6 +1,5 @@
 write prettier script
 rename lib.js  to fileUtil.js
-give name to regex
 
 DONE: 
 make .gitignore
