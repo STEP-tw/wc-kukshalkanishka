@@ -1,16 +1,11 @@
-parseForNoOption = function(args) {
-  filePath = args[0];
-  return { options, filePath };
-};
-
 const counters = { l: "lineCount", c: "byteCount", w: "wordCount" };
+
+const startWithDash = option => option.startsWith("-");
 
 const getOptions = function(arg) {
   let userOptions = arg.split("");
   return userOptions.map(userOption => counters[userOption]);
 };
-
-const startWithDash = option => option.startsWith("-");
 
 const parse = function(args) {
   let firstArg = args[0];
@@ -19,7 +14,7 @@ const parse = function(args) {
 
   if (!startWithDash(firstArg)) {
     options = ["lineCount", "wordCount", "byteCount"];
-    filePath = args[0];
+    filePath = firstArg;
   }
 
   return { options, filePath };
