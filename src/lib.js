@@ -30,13 +30,13 @@ const wc = function({ filePath, options }, fs) {
   let counts = {
     lineCount: undefined,
     byteCount: undefined,
-    wordCount: undefined
+    wordCount: undefined,
+    filePath: filePath
   };
   options.map(function(option) {
     counter = counters[option];
     counts[option] = counter(content);
   });
-  counts.filePath = filePath;
   return counts;
 };
 
