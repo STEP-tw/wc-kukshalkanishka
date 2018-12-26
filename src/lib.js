@@ -1,26 +1,53 @@
 const { NEWLINE, EMPTY } = require("./constants.js");
 const newlineOrSpace = /[ \n]+/;
 
-const getCount = function(content, delimiter) {
+const getCount = function(delimiter, content) {
   return content.split(delimiter).length;
 };
 
-const getWordCount = function(content) {
+const countWords = function(content) {
   let trimmedContent = content.trim();
-  return getCount(trimmedContent, newlineOrSpace);
+  return getCount(newlineOrSpace, trimmedContent);
 };
 
-const getCounts = function(content) {
-  let lineCount = getCount(content, NEWLINE) - 1;
-  let wordCount = getWordCount(content);
-  let byteCount = getCount(content, EMPTY);
+const countLines = function(content) {
+  return getCount(NEWLINE, content) - 1;
+};
+
+const countBytes = function(content) {
+  return getCount(EMPTY, content);
+};
+
+const getAllCounts = function(content) {
+  let lineCount = countLines(content);
+  let wordCount = countWords(content);
+  let byteCount = countBytes(content);
   return { lineCount, wordCount, byteCount };
 };
 
-const wc = function(filePath, fs) {
+const counters = {
+  lineCount: countLines,
+  byteCount: countBytes,
+  wordCount: countWords,
+  allCounts: getAllCounts
+};
+
+const wc = function({ filePath, option }, fs) {
   let content = fs.readFileSync(filePath, "utf8");
-  let { lineCount, wordCount, byteCount } = getCounts(content);
-  return { lineCount, wordCount, byteCount, filePath };
+  let counts = {
+    lineCount: undefined,
+    byteCount: undefined,
+    wordCount: undefined
+  };
+  let counter = counters[option];
+  counts[option] = counter(content);
+
+  if (counter === getAllCounts) {
+    counts = getAllCounts(content);
+  }
+
+  counts.filePath = filePath;
+  return counts;
 };
 
 module.exports = { wc };
