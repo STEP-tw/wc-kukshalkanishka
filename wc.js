@@ -1,3 +1,13 @@
+const fs = require("fs");
+const { wc, formatter } = require("./src/lib.js");
+
+const main = function() {
+  let filePath = process.argv[2];
+  let countDetail = wc(filePath, fs);
+  console.log(formatter(countDetail));
+};
+
+main();
 /* 
   Usage:
   node ./wc.js file1

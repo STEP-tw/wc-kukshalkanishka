@@ -1,0 +1,11 @@
+move formatter to its own file.
+make main.
+write prettier script
+rename lib.js  to fileUtil.js
+
+DONE: 
+make .gitignore
+npm init
+write precommit
+make mock reader in test helpers file.
+write tests for wc function for one file 
