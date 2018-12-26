@@ -50,5 +50,27 @@ describe("wc", () => {
       };
       assert.deepEqual(actual, expected);
     });
+
+    it("should only return byteCount and filePath's value when option is byte", () => {
+      let actual = wc({ option: "byteCount", filePath: "file1" }, fs);
+      let expected = {
+        filePath: "file1",
+        lineCount: undefined,
+        wordCount: undefined,
+        byteCount: 67
+      };
+      assert.deepEqual(actual, expected);
+    });
+
+    it("should only return byteCount and filePath's value when option is byte", () => {
+      let actual = wc({ option: "wordCount", filePath: "file1" }, fs);
+      let expected = {
+        filePath: "file1",
+        lineCount: undefined,
+        byteCount: undefined,
+        wordCount: 20
+      };
+      assert.deepEqual(actual, expected);
+    });
   });
 });

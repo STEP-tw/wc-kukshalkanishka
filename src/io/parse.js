@@ -5,7 +5,7 @@ parseForSingleFile = function(args) {
   return { option, filePath, formatter };
 };
 
-const formatters = { "-l": "line" };
+const formatters = { "-l": "line", "-c": "byte", "-w": "word" };
 const counters = { "-l": "lineCount", "-c": "byteCount", "-w": "wordCount" };
 
 const parse = function(args) {

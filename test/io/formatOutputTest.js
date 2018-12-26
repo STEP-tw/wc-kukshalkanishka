@@ -25,4 +25,26 @@ describe("formatOutput", () => {
     let expected = "\t3 file1";
     assert.equal(actual, expected);
   });
+
+  it("should return byteCount and filePath seperated by space", () => {
+    let counts = {
+      filePath: "file1",
+      byteCount: 20
+    };
+    let actual = formatOutput("byte", counts);
+
+    let expected = "\t20 file1";
+    assert.equal(actual, expected);
+  });
+
+  it("should return wordCount and filePath seperated by space", () => {
+    let counts = {
+      filePath: "file1",
+      wordCount: 67
+    };
+    let actual = formatOutput("word", counts);
+
+    let expected = "\t67 file1";
+    assert.equal(actual, expected);
+  });
 });

@@ -9,9 +9,19 @@ const lineFormatter = function({ lineCount, filePath }) {
   return TAB + lineCount + SPACE + filePath;
 };
 
+const byteFormatter = function({ byteCount, filePath }) {
+  return TAB + byteCount + SPACE + filePath;
+};
+
+const wordFormatter = function({ wordCount, filePath }) {
+  return TAB + wordCount + SPACE + filePath;
+};
+
 const formatters = {
   nonOption: nonOptionFormatter,
-  line: lineFormatter
+  line: lineFormatter,
+  word: wordFormatter,
+  byte: byteFormatter
 };
 
 const formatOutput = function(argsType, countDetails) {

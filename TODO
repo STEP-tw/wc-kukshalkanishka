@@ -1,5 +1,8 @@
 write prettier script
+extact word count, byte count and line count into its own functions.
 rename lib.js  to fileUtil.js
+rename countDetail in main
+
 
 DONE: 
 make .gitignore
