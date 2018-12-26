@@ -1,5 +1,5 @@
 const assert = require("assert");
-const { wc, formatter } = require("../src/lib.js");
+const { wc } = require("../src/lib.js");
 const { mockReader } = require("./testHelpers/mockReader.js");
 
 describe("wc", () => {
@@ -19,20 +19,5 @@ describe("wc", () => {
       byteCount: 67
     };
     assert.deepEqual(wc("file1", fs), expected);
-  });
-});
-
-describe("formatter", () => {
-  it("should return lines, words, bytes and filePath seperated by tabs", () => {
-    let counts = {
-      filePath: "file1",
-      lineCount: 3,
-      wordCount: 20,
-      byteCount: 67
-    };
-    let actual = formatter(counts);
-
-    let expected = "\t3\t20\t67 file1";
-    assert.equal(actual, expected);
   });
 });
