@@ -1,16 +1,14 @@
 const counters = { l: "lineCount", c: "byteCount", w: "wordCount" };
 
-const startWithDash = option => option.startsWith("-");
+const getOptionsAndFilePath = function(userArgs) {
+  let args = userArgs.slice();
+  let userOptions = [];
 
-const getOptionsAndFilePath = function(args) {
-  let userOptions = "";
-  args.map(function(arg) {
-    if (startWithDash(arg)) {
-      userOptions += arg.slice(1);
-    }
-    filePath = arg;
-  });
-  userOptions = userOptions.split("");
+  while (args[0].startsWith("-")) {
+    userOptions = userOptions.concat(args[0].slice(1).split(""));
+    args.shift();
+  }
+  filePath = args.pop();
   return { userOptions, filePath };
 };
 
