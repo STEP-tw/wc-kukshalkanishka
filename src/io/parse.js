@@ -1,3 +1,4 @@
+const { HYPHEN, EMPTY } = require("../constants");
 const counters = { l: "lineCount", c: "byteCount", w: "wordCount" };
 const allOptions = ["lineCount", "wordCount", "byteCount"];
 
@@ -5,23 +6,31 @@ const getOptionsAndFilePath = function(userArgs) {
   let args = userArgs.slice();
   let userOptions = [];
 
-  while (args[0].startsWith("-")) {
-    userOptions = userOptions.concat(args[0].slice(1).split(""));
+  while (args[0].startsWith(HYPHEN)) {
+    let option = args[0].slice(1);
+    userOptions = userOptions.concat(option.split(EMPTY));
     args.shift();
   }
-  filePath = args.pop();
-  return { userOptions, filePath };
+  filePaths = args;
+  return { userOptions, filePaths };
+};
+
+const sortOptions = function(options) {
+  return allOptions.filter(option => options.includes(option));
 };
 
 const parse = function(args) {
-  let { filePath, userOptions } = getOptionsAndFilePath(args);
-  if (userOptions.length == 0) {
-    userOptions = ["l", "w", "c"];
-  }
-
+  let formatter = "multiFile";
+  let { filePaths, userOptions } = getOptionsAndFilePath(args);
   let options = userOptions.map(userOption => counters[userOption]);
-  options = allOptions.filter(option => options.includes(option));
-  return { options, filePath };
+  let sortedOptions = sortOptions(options);
+  if (userOptions.length == 0) {
+    sortedOptions = allOptions;
+  }
+  if (filePaths.length == 1) {
+    formatter = "singleFile";
+  }
+  return { options: sortedOptions, filePaths, formatter };
 };
 
 module.exports = { parse };
