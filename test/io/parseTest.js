@@ -34,11 +34,43 @@ describe("parse", () => {
     assert.deepEqual(parse(["-w", "file1"]), expected);
   });
 
-  it("should provide wordCount and lineCount as options then [-lc] is provided", () => {
+  it("should provide wordCount and lineCount as options when [-lc] is provided", () => {
     let expected = {
       options: ["wordCount", "lineCount"],
       filePath: "file1"
     };
     assert.deepEqual(parse(["-wl", "file1"]), expected);
+  });
+
+  it("should provide wordCount and lineCount as options when [-l -c] is provided", () => {
+    let expected = {
+      options: ["lineCount", "byteCount"],
+      filePath: "file1"
+    };
+    assert.deepEqual(parse(["-l", "-c", "file1"]), expected);
+  });
+
+  it("should provide wordCount and byteCount as options when [-w -c] is provided", () => {
+    let expected = {
+      options: ["wordCount", "byteCount"],
+      filePath: "file1"
+    };
+    assert.deepEqual(parse(["-w", "-c", "file1"]), expected);
+  });
+
+  it("should provide wordCount and lineCount as options when [-w -l] is provided", () => {
+    let expected = {
+      options: ["wordCount", "lineCount"],
+      filePath: "file1"
+    };
+    assert.deepEqual(parse(["-w", "-l", "file1"]), expected);
+  });
+
+  it("should provide wordCount and lineCount as options when [-l, -c, -w] is provided", () => {
+    let expected = {
+      options: ["lineCount", "byteCount", "wordCount"],
+      filePath: "file1"
+    };
+    assert.deepEqual(parse(["-l", "-c", "-w", "file1"]), expected);
   });
 });
