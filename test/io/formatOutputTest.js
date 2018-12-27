@@ -112,8 +112,28 @@ describe("formatOutput", () => {
   });
 });
 
+describe("singel file formatter", () => {
+  it("should return required counts of particular file", () => {
+    let counts = [
+      {
+        filePath: "file1",
+        wordCount: 33,
+        lineCount: 3,
+        byteCount: 120
+      }
+    ];
+    let actual = singleFileFormatter(counts, [
+      "lineCount",
+      "wordCount",
+      "byteCount"
+    ]);
+    let expected = "\t3\t33\t120 file1";
+    assert.equal(actual, expected);
+  });
+});
+
 describe("multiple file formatter", () => {
-  it("should format for multiple files", () => {
+  it("should return required counts with total of counts", () => {
     let counts = [
       {
         filePath: "file1",
