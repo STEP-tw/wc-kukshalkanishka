@@ -1,11 +1,8 @@
 const { TAB, SPACE } = require("../constants.js");
 
-const formatOutput = function(countDetails) {
-  const { lineCount, byteCount, wordCount, filePath } = countDetails;
-  let allCounts = [""];
-  allCounts.push(lineCount, wordCount, byteCount);
-  let counts = allCounts.filter(count => count != undefined);
-  return counts.join(TAB) + SPACE + filePath;
+const formatOutput = function(countDetails, options) {
+  counts = options.map(option => countDetails[option]);
+  return TAB + counts.join(TAB) + SPACE + countDetails.filePath;
 };
 
 module.exports = { formatOutput };

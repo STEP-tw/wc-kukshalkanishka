@@ -1,4 +1,5 @@
 const counters = { l: "lineCount", c: "byteCount", w: "wordCount" };
+const allOptions = ["lineCount", "wordCount", "byteCount"];
 
 const getOptionsAndFilePath = function(userArgs) {
   let args = userArgs.slice();
@@ -19,6 +20,7 @@ const parse = function(args) {
   }
 
   let options = userOptions.map(userOption => counters[userOption]);
+  options = allOptions.filter(option => options.includes(option));
   return { options, filePath };
 };
 

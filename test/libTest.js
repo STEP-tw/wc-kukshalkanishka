@@ -44,39 +44,4 @@ describe("wc", () => {
       assert.deepEqual(actual, expected);
     });
   });
-
-  describe("wc with option for single file", () => {
-    it("should only return lineCount and filePath's value when option is line", () => {
-      let actual = wc({ options: ["lineCount"], filePath: "file1" }, fs);
-      let expected = {
-        filePath: "file1",
-        byteCount: undefined,
-        wordCount: undefined,
-        lineCount: 3
-      };
-      assert.deepEqual(actual, expected);
-    });
-
-    it("should only return byteCount and filePath's value when option is byte", () => {
-      let actual = wc({ options: ["byteCount"], filePath: "file1" }, fs);
-      let expected = {
-        filePath: "file1",
-        lineCount: undefined,
-        wordCount: undefined,
-        byteCount: 67
-      };
-      assert.deepEqual(actual, expected);
-    });
-
-    it("should only return byteCount and filePath's value when option is byte", () => {
-      let actual = wc({ options: ["wordCount"], filePath: "file1" }, fs);
-      let expected = {
-        filePath: "file1",
-        lineCount: undefined,
-        byteCount: undefined,
-        wordCount: 20
-      };
-      assert.deepEqual(actual, expected);
-    });
-  });
 });

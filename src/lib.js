@@ -19,24 +19,14 @@ const countBytes = function(content) {
   return content.length;
 };
 
-const counters = {
-  lineCount: countLines,
-  byteCount: countBytes,
-  wordCount: countWords
-};
-
-const wc = function({ filePath, options }, fs) {
+const wc = function({ filePath }, fs) {
   let content = fs.readFileSync(filePath, "utf8");
   let counts = {
-    lineCount: undefined,
-    byteCount: undefined,
-    wordCount: undefined,
+    lineCount: countLines(content),
+    byteCount: countBytes(content),
+    wordCount: countWords(content),
     filePath: filePath
   };
-  options.map(function(option) {
-    counter = counters[option];
-    counts[option] = counter(content);
-  });
   return counts;
 };
 

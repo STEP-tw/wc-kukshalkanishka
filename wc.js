@@ -6,7 +6,7 @@ const { formatOutput } = require("./src/io/formatOutput.js");
 const main = function() {
   let parsedArgs = parse(process.argv.slice(2));
   let countDetail = wc(parsedArgs, fs);
-  console.log(formatOutput(countDetail));
+  console.log(formatOutput(countDetail, parsedArgs.options));
 };
 
 main();
