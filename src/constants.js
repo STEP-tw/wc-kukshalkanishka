@@ -1,7 +1,7 @@
 const NEWLINE = "\n";
 const SPACE = " ";
 const TAB = "\t";
-const EMPTY = "";
+const EMPTY_STRING = "";
 const HYPHEN = "-";
 
-module.exports = { NEWLINE, SPACE, TAB, EMPTY, HYPHEN };
+module.exports = { NEWLINE, SPACE, TAB, EMPTY_STRING, HYPHEN };
