@@ -4,7 +4,7 @@ const { parse } = require("../../src/io/parse.js");
 describe("parse", () => {
   describe("parse for single option", () => {
     it("should provide options as allCounts when no options is given", () => {
-      let expected = {
+      const expected = {
         options: ["lineCount", "wordCount", "byteCount"],
         filePaths: ["file1"],
         formatter: "singleFile"
@@ -14,7 +14,7 @@ describe("parse", () => {
     });
 
     it("should provide line as an options when [-l] is provided", () => {
-      let expected = {
+      const expected = {
         options: ["lineCount"],
         filePaths: ["file1"],
         formatter: "singleFile"
@@ -24,7 +24,7 @@ describe("parse", () => {
     });
 
     it("should provide byte as an options when [-c] is provided", () => {
-      let expected = {
+      const expected = {
         options: ["byteCount"],
         filePaths: ["file1"],
         formatter: "singleFile"
@@ -34,7 +34,7 @@ describe("parse", () => {
     });
 
     it("should provide word as an options when [-w] is provided", () => {
-      let expected = {
+      const expected = {
         options: ["wordCount"],
         filePaths: ["file1"],
         formatter: "singleFile"
@@ -45,7 +45,7 @@ describe("parse", () => {
   });
   describe("parse for more than one option wihtout seperation", () => {
     it("should provide wordCount and lineCount as options when [-wl] is provided", () => {
-      let expected = {
+      const expected = {
         options: ["lineCount", "wordCount"],
         filePaths: ["file1"],
         formatter: "singleFile"
@@ -55,7 +55,7 @@ describe("parse", () => {
     });
 
     it("should provide line and byte count as options when [-lc] is provided", () => {
-      let expected = {
+      const expected = {
         options: ["lineCount", "byteCount"],
         filePaths: ["file1"],
         formatter: "singleFile"
@@ -65,7 +65,7 @@ describe("parse", () => {
     });
 
     it("should provide wordCount and lineCount as options when [-wc] is provided", () => {
-      let expected = {
+      const expected = {
         options: ["wordCount", "byteCount"],
         filePaths: ["file1"],
         formatter: "singleFile"
@@ -77,7 +77,7 @@ describe("parse", () => {
 
   describe("parse for options seperated by spaces", () => {
     it("should provide wordCount and lineCount as options when [-l -c] is provided", () => {
-      let expected = {
+      const expected = {
         options: ["lineCount", "byteCount"],
         filePaths: ["file1"],
         formatter: "singleFile"
@@ -87,7 +87,7 @@ describe("parse", () => {
     });
 
     it("should provide wordCount and byteCount as options when [-w -c] is provided", () => {
-      let expected = {
+      const expected = {
         options: ["wordCount", "byteCount"],
         filePaths: ["file1"],
         formatter: "singleFile"
@@ -97,7 +97,7 @@ describe("parse", () => {
     });
 
     it("should provide wordCount and lineCount as options when [-w -l] is provided", () => {
-      let expected = {
+      const expected = {
         options: ["lineCount", "wordCount"],
         filePaths: ["file1"],
         formatter: "singleFile"
@@ -107,7 +107,7 @@ describe("parse", () => {
     });
 
     it("should provide wordCount and lineCount as options when [-l, -c, -w] is provided", () => {
-      let expected = {
+      const expected = {
         options: ["lineCount", "wordCount", "byteCount"],
         filePaths: ["file1"],
         formatter: "singleFile"
@@ -118,7 +118,7 @@ describe("parse", () => {
   });
   describe("parse for multiple files", () => {
     it("should return multiple files in an array when multiple files is provided", () => {
-      let expected = {
+      const expected = {
         options: ["lineCount", "wordCount", "byteCount"],
         filePaths: ["file1", "file2"],
         formatter: "multiFile"

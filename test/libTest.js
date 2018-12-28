@@ -4,27 +4,28 @@ const { mockReader } = require("./testHelpers/mockReader.js");
 
 describe("wc", () => {
   const fs = {};
-  let file1Content =
+  const file1Content =
     "this is a line 1\n" +
     "this is a line 2\n" +
     "this is a line 3\n" +
     "this is a line 4";
 
-  let singleLine = "this is a line";
+  const singleLine = "this is a line";
   fs.readFileSync = mockReader({
     file1: file1Content,
     file2: singleLine
   });
+
   describe("wc without option, for single file", () => {
     it("should return the filePath, lines, words and bytes count of the provided file", () => {
-      let actual = wc(
+      const actual = wc(
         {
           options: ["lineCount", "wordCount", "byteCount"],
           filePaths: ["file1"]
         },
         fs
       );
-      let expected = [
+      const expected = [
         {
           filePath: "file1",
           lineCount: 3,
@@ -36,14 +37,14 @@ describe("wc", () => {
     });
 
     it("should give lineCount as 0 for single line file", () => {
-      let actual = wc(
+      const actual = wc(
         {
           options: ["lineCount", "wordCount", "byteCount"],
           filePaths: ["file2"]
         },
         fs
       );
-      let expected = [
+      const expected = [
         {
           filePath: "file2",
           lineCount: 0,
@@ -54,14 +55,14 @@ describe("wc", () => {
       assert.deepEqual(actual, expected);
     });
     it("should give array of two fileDetails when two files are provided", () => {
-      let actual = wc(
+      const actual = wc(
         {
           options: ["lineCount", "wordCount", "byteCount"],
           filePaths: ["file1", "file2"]
         },
         fs
       );
-      let expected = [
+      const expected = [
         {
           filePath: "file1",
           lineCount: 3,

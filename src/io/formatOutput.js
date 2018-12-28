@@ -1,11 +1,11 @@
-const { TAB, SPACE } = require("../constants.js");
+const { TAB, SPACE, NEWLINE } = require("../constants.js");
 
-const formatOutput = function(countDetails, options) {
-  let allCounts = countDetails.map(countDetail => {
+const formatOutput = function(fileDetails, options) {
+  const allCounts = fileDetails.map(countDetail => {
     counts = options.map(option => countDetail[option]);
     return TAB + counts.join(TAB) + SPACE + countDetail.filePath;
   });
-  return allCounts.join("\n");
+  return allCounts.join(NEWLINE);
 };
 
 const singleFileFormatter = function(countDetails, options) {
@@ -13,17 +13,17 @@ const singleFileFormatter = function(countDetails, options) {
 };
 
 const multipleFileFormatter = function(fileDetails, options) {
-  let detailsClone = fileDetails.slice();
-  detailsClone.push(getTotalCounts(fileDetails));
+  const detailsClone = fileDetails.slice();
+  detailsClone.push(getCountsTotal(fileDetails));
   return formatOutput(detailsClone, options);
 };
 
-const getTotalCounts = function(countDetails) {
-  let total = countDetails.reduce((counts1, counts2) => {
-    let lineCount = counts1.lineCount + counts2.lineCount;
-    let wordCount = counts1.wordCount + counts2.wordCount;
-    let byteCount = counts1.byteCount + counts2.byteCount;
-    let filePath = "total";
+const getCountsTotal = function(fileDetails) {
+  const total = fileDetails.reduce((file1, file2) => {
+    const lineCount = file1.lineCount + file2.lineCount;
+    const wordCount = file1.wordCount + file2.wordCount;
+    const byteCount = file1.byteCount + file2.byteCount;
+    const filePath = "total";
     return { lineCount, wordCount, byteCount, filePath };
   });
   return total;

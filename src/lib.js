@@ -2,12 +2,12 @@ const { NEWLINE } = require("./constants.js");
 const newlineOrSpace = /[ \n]+/;
 
 const getCount = function(delimiter, content) {
-  let splitted = content.split(delimiter);
+  const splitted = content.split(delimiter);
   return splitted.length;
 };
 
 const countWords = function(content) {
-  let trimmedContent = content.trim();
+  const trimmedContent = content.trim();
   return getCount(newlineOrSpace, trimmedContent);
 };
 
@@ -20,11 +20,11 @@ const countBytes = function(content) {
 };
 
 const wc = function({ filePaths }, fs) {
-  let fileDetails = filePaths.map(filePath => {
-    let content = fs.readFileSync(filePath, "utf8");
-    let lineCount = countLines(content);
-    let byteCount = countBytes(content);
-    let wordCount = countWords(content);
+  const fileDetails = filePaths.map(filePath => {
+    const content = fs.readFileSync(filePath, "utf8");
+    const lineCount = countLines(content);
+    const byteCount = countBytes(content);
+    const wordCount = countWords(content);
     return { lineCount, byteCount, wordCount, filePath };
   });
   return fileDetails;

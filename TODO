@@ -1,12 +1,9 @@
-write prettier script
-extact word count, byte count and line count into its own functions.
 rename lib.js  to fileUtil.js
-rename countDetail in main
-refactor parse
-distribute parse tests
+refactor parse: clean up the get files and options function.
 
 
 DONE: 
+
 make .gitignore
 npm init
 write precommit
@@ -15,4 +12,6 @@ write tests for wc function for one file
 make main.
 move formatter to its own file.
 move constants to its own file
-
+rename countDetail in main
+distribute parse tests
+extact word count, byte count and line count into its own functions.
