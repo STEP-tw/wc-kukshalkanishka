@@ -8,7 +8,9 @@ const getCount = function(delimiter, content) {
 
 const countWords = function(content) {
   const trimmedContent = content.trim();
-  return getCount(newlineOrSpace, trimmedContent);
+  const words = trimmedContent.split(newlineOrSpace);
+  const nonEmptyWords = words.filter(word => word);
+  return nonEmptyWords.length;
 };
 
 const countLines = function(content) {
